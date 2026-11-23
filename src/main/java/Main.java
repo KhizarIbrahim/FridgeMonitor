@@ -21,5 +21,8 @@ public class Main {
         for (StorageUnit unit : units) {
             System.out.println(unit);
         }
+
+        Monitor monitor = new Monitor(system, units);
+        monitor.createWindow();
     }
 }
