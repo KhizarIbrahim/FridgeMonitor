@@ -1,6 +1,7 @@
 import pharmacy.FridgeSystem;
 import pharmacy.SensorFaultException;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,5 +25,8 @@ public class Main {
 
         Monitor monitor = new Monitor(system, units);
         monitor.createWindow();
+
+        Timer timer = new Timer(1000, e -> monitor.update());
+        timer.start();
     }
 }

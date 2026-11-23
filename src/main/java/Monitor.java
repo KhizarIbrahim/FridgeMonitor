@@ -36,4 +36,23 @@ public class Monitor {
         frame.setVisible(true);
     }
 
+    public void update() {
+        for (int i = 0; i < units.size(); i++) {
+            StorageUnit unit = units.get(i);
+            JLabel label = labels.get(i);
+
+            try {
+                double temp = system.getTemperature(unit.getId());
+                boolean coolingOn = system.isCoolingOn(unit.getId());
+
+                label.setText("<html><b>" + unit.getName() + "</b><br>"
+                        + "Temp: " + String.format("%.1f", temp) + " C<br>"
+                        + "Safe: " + unit.getMinTemp() + " to " + unit.getMaxTemp() + " C<br>"
+                        + "Cooling: " + (coolingOn ? "ON" : "OFF")
+                        + "</html>");
+            } catch (SensorFaultException e) {
+                label.setText("<html><b>" + unit.getName() + "</b><br>SENSOR FAULT</html>");
+            }
+        }
+    }
 }
